@@ -22,7 +22,6 @@ class Header extends Component {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link href="#link">Link</Nav.Link>
             <NavDropdown title="Movie" id="basic-nav-dropdown">
               <NavDropdown.Item href={"/movieList/" + NowPlaying}>
                 Now Playing

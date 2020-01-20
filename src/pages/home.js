@@ -3,9 +3,9 @@ import Header from "../components/header";
 import Crausel from "../components/crausel";
 import "../App.css";
 import Axios from "axios";
-import { Button, Card, Row } from "react-bootstrap";
+import { Card, Row } from "react-bootstrap";
 import Footer from "../components/footer";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 
 class Home extends Component {
   constructor(props) {
@@ -48,10 +48,10 @@ class Home extends Component {
                     <Card.Text>
                       {data.overview.substring(0, 100) + ".."}
                     </Card.Text>
-                    <Button variant="dark" href={"/movieDetail/" + data.id}>
-                      Go Detail
-                    </Button>
                   </Card.Body>
+                  <Card.Footer>
+                    <Link to={"/movieDetail/" + data.id}> More Info</Link>
+                  </Card.Footer>
                 </Card>
               );
             })}

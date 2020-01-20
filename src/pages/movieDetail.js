@@ -40,8 +40,10 @@ class MovieDetail extends Component {
     return (
       <div>
         <Header />
-        <Card bg="dark" style={{ color: "white" }}>
-          <Card.Header as="h5">{data.original_title}</Card.Header>
+        <Card style={{ color: "white", backgroundColor: "black" }}>
+          <Card.Header as="h3" style={{ textAlign: "center" }}>
+            {data.original_title}
+          </Card.Header>
 
           <div
             style={{
@@ -61,7 +63,7 @@ class MovieDetail extends Component {
           <Card.Body>
             <Row>
               <Col>
-                <Card bg="dark" style={{ margin: "10px", color: "white" }}>
+                <Card bg="dark" style={{ color: "white" }}>
                   <Card.Header>OVERVIEW</Card.Header>
                   <Card.Body>
                     <Card.Text>{data.overview}</Card.Text>
@@ -70,7 +72,7 @@ class MovieDetail extends Component {
               </Col>
               <Col>
                 <Card bg="dark">
-                  <Card.Header>Description </Card.Header>
+                  <Card.Header>DESCRIPTION </Card.Header>
                   <Card.Body>
                     <h6>Homepage : {data.homepage}</h6>
                     <h6>Status : {data.status}</h6>
@@ -85,7 +87,7 @@ class MovieDetail extends Component {
               </Col>
               <Col>
                 <Card bg="dark">
-                  <Card.Header>Production Company</Card.Header>
+                  <Card.Header>PRODUCTION COMPANY</Card.Header>
                   {this.state.production_companies.map((data, index) => {
                     if (data.logo_path === null) {
                       return (
@@ -131,15 +133,15 @@ class MovieDetail extends Component {
                 </Card>
               </Col>
             </Row>
-
             <Card
               bg="info"
               style={{
                 color: "black",
-                textAlign: "justify"
+                textAlign: "justify",
+                margin: "10px 0"
               }}
             >
-              <h2>Reviews</h2>
+              <Card.Header as="h2">Reviews</Card.Header>
               {this.state.reviews.map((data, index) => {
                 return (
                   <Card
@@ -157,7 +159,6 @@ class MovieDetail extends Component {
             </Card>
           </Card.Body>
         </Card>
-
         <Footer />
       </div>
     );

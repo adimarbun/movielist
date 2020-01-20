@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Header from "../components/header";
-import { withRouter } from "react-router-dom";
+import Footer from "../components/footer";
+import { withRouter, Link } from "react-router-dom";
 import Axios from "axios";
 import { Button, Card, Row } from "react-bootstrap";
 
@@ -28,32 +29,32 @@ class MovieList extends Component {
     return (
       <div>
         <Header />
-        <div style={{ padding: " 0 10%" }}>
-          <Row style={{ width: "100%" }}>
-            {datas.map((data, index) => {
-              return (
-                <Card key={index} style={{ width: "18rem", margin: "5px" }}>
-                  <Card.Img
-                    variant="top"
-                    src={
-                      `https://image.tmdb.org/t/p/w500_and_h282_face` +
-                      data.poster_path
-                    }
-                  />
-                  <Card.Body>
-                    <Card.Title> {data.title}</Card.Title>
-                    <Card.Text>
-                      {data.overview.substring(0, 100) + ".."}
-                    </Card.Text>
-                    <Button variant="dark" href={"/movieDetail/" + data.id}>
-                      Go Detail
-                    </Button>
-                  </Card.Body>
-                </Card>
-              );
-            })}
-          </Row>
-        </div>
+
+        <Row style={{ width: "100%", padding: " 0 10%" }}>
+          {datas.map((data, index) => {
+            return (
+              <Card key={index} style={{ width: "18rem", margin: "5px" }}>
+                <Card.Img
+                  variant="top"
+                  src={
+                    `https://image.tmdb.org/t/p/w500_and_h282_face` +
+                    data.poster_path
+                  }
+                />
+                <Card.Body>
+                  <Card.Title> {data.title}</Card.Title>
+                  <Card.Text>
+                    {data.overview.substring(0, 100) + ".."}
+                  </Card.Text>
+                </Card.Body>
+                <Card.Footer>
+                  <Link to={"/movieDetail/" + data.id}> More Info</Link>
+                </Card.Footer>
+              </Card>
+            );
+          })}
+        </Row>
+        <Footer />
       </div>
     );
   }
