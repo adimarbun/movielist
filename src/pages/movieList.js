@@ -13,10 +13,11 @@ class MovieList extends Component {
   }
 
   componentDidMount() {
+    const { match } = this.props;
+
     Axios({
       method: "get",
-      url:
-        "https://api.themoviedb.org/3/trending/all/day?api_key=8f1d4611b0e6ecfdb978fc2bb38c6fc6"
+      url: `https://api.themoviedb.org/3/movie/${match.params.name}?api_key=8f1d4611b0e6ecfdb978fc2bb38c6fc6`
     }).then(res => {
       this.setState({ data: res.data.results });
     });

@@ -12,7 +12,7 @@ function App() {
     <div style={{ backgroundColor: "black" }}>
       <Router>
         <Switch>
-          <Route path="/movieList">
+          <Route path="/movieList/:name">
             <MovieList />
           </Route>
           <Route path="/movieDetail/:id">

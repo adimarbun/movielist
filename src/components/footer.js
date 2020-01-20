@@ -7,10 +7,9 @@ class Footer extends Component {
       <Card bg="info">
         <Card.Header as="h5">MOVIE LIST</Card.Header>
         <Card.Body>
-          <Card.Title>Special title treatment</Card.Title>
+          <Card.Title>Special Movie Detail</Card.Title>
           <Card.Text>
-            With supporting text below as a natural lead-in to additional
-            content.
+            See the description of the movie that you will watch in the cinema
           </Card.Text>
         </Card.Body>
       </Card>

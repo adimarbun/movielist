@@ -11,7 +11,8 @@ class MovieDetail extends Component {
     this.state = {
       data: [],
       genres: [],
-      production_companies: []
+      production_companies: [],
+      reviews: []
     };
   }
 
@@ -25,6 +26,12 @@ class MovieDetail extends Component {
       this.setState({ data: res.data });
       this.setState({ genres: res.data.genres });
       this.setState({ production_companies: res.data.production_companies });
+    });
+    Axios({
+      method: "get",
+      url: `https://api.themoviedb.org/3/movie/${match.params.id}/reviews?api_key=8f1d4611b0e6ecfdb978fc2bb38c6fc6`
+    }).then(res => {
+      this.setState({ reviews: res.data.results });
     });
   }
   render() {
@@ -54,71 +61,103 @@ class MovieDetail extends Component {
           <Card.Body>
             <Row>
               <Col>
-                <h4>Overview</h4>
-                <Card.Text>{data.overview}</Card.Text>
+                <Card bg="dark" style={{ margin: "10px", color: "white" }}>
+                  <Card.Header>OVERVIEW</Card.Header>
+                  <Card.Body>
+                    <Card.Text>{data.overview}</Card.Text>
+                  </Card.Body>
+                </Card>
               </Col>
               <Col>
-                <h4>Description </h4>
-                <div>
-                  <h6>Homepage : {data.homepage}</h6>
-                  <h6>Status : {data.status}</h6>
-                  <h6>Release Date : {data.release_date}</h6>
-                </div>
-                <div>
-                  <h5>Genres:</h5>
-                  {this.state.genres.map((data, index) => {
-                    return <h6 key={index}>*{data.name}</h6>;
+                <Card bg="dark">
+                  <Card.Header>Description </Card.Header>
+                  <Card.Body>
+                    <h6>Homepage : {data.homepage}</h6>
+                    <h6>Status : {data.status}</h6>
+                    <h6>Release Date : {data.release_date}</h6>
+
+                    <h5>Genres:</h5>
+                    {this.state.genres.map((data, index) => {
+                      return <h6 key={index}>*{data.name}</h6>;
+                    })}
+                  </Card.Body>
+                </Card>
+              </Col>
+              <Col>
+                <Card bg="dark">
+                  <Card.Header>Production Company</Card.Header>
+                  {this.state.production_companies.map((data, index) => {
+                    if (data.logo_path === null) {
+                      return (
+                        <div
+                          key={index}
+                          style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: "center"
+                          }}
+                        >
+                          <Image
+                            src={`https://cdn.pixabay.com/photo/2015/09/02/12/45/movie-918655__340.jpg`}
+                            thumbnail
+                            style={{ maxWidth: "70px", margin: "10px" }}
+                          />
+                          <h6>{data.name}</h6>
+                        </div>
+                      );
+                    } else {
+                      return (
+                        <div
+                          key={index}
+                          style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: "center"
+                          }}
+                        >
+                          <Image
+                            src={
+                              `https://image.tmdb.org/t/p/w500_and_h282_face` +
+                              data.logo_path
+                            }
+                            thumbnail
+                            style={{ maxWidth: "70px", margin: "10px" }}
+                          />
+                          <h6>{data.name}</h6>
+                        </div>
+                      );
+                    }
                   })}
-                </div>
-              </Col>
-              <Col>
-                <h4>Production Company</h4>
-                {this.state.production_companies.map((data, index) => {
-                  if (data.logo_path === null) {
-                    return (
-                      <div
-                        key={index}
-                        style={{
-                          display: "flex",
-                          flexDirection: "row",
-                          alignItems: "center"
-                        }}
-                      >
-                        <Image
-                          src={`https://cdn.pixabay.com/photo/2015/09/02/12/45/movie-918655__340.jpg`}
-                          thumbnail
-                          style={{ maxWidth: "100px", margin: "10px" }}
-                        />
-                        <h6>{data.name}</h6>
-                      </div>
-                    );
-                  } else {
-                    return (
-                      <div
-                        key={index}
-                        style={{
-                          display: "flex",
-                          flexDirection: "row",
-                          alignItems: "center"
-                        }}
-                      >
-                        <Image
-                          src={
-                            `https://image.tmdb.org/t/p/w500_and_h282_face` +
-                            data.logo_path
-                          }
-                          thumbnail
-                          style={{ maxWidth: "100px", margin: "10px" }}
-                        />
-                        <h6>{data.name}</h6>
-                      </div>
-                    );
-                  }
-                })}
+                </Card>
               </Col>
             </Row>
+
+            <Card
+              bg="info"
+              style={{
+                color: "black",
+                textAlign: "justify"
+              }}
+            >
+              <h2>Reviews</h2>
+              {this.state.reviews.map((data, index) => {
+                return (
+                  <Card
+                    bg="dark"
+                    key={index}
+                    style={{ margin: "10px", color: "white" }}
+                  >
+                    <Card.Header>Author : {data.author}</Card.Header>
+                    <Card.Body>
+                      <Card.Text>{data.content}</Card.Text>
+                    </Card.Body>
+                  </Card>
+                );
+              })}
+            </Card>
           </Card.Body>
         </Card>
+
         <Footer />
       </div>
     );
