@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import {
   Navbar,
   Nav,
@@ -11,11 +11,6 @@ import {
 
 class Header extends Component {
   render() {
-    const NowPlaying = "now_playing";
-    const Popular = "popular";
-    const TopRated = "top_rated";
-    const Upcoming = "upcoming";
-
     return (
       <Navbar bg="info" expand="lg">
         <Navbar.Brand href="/">Movie-List</Navbar.Brand>
@@ -23,17 +18,17 @@ class Header extends Component {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
             <NavDropdown title="Movie" id="basic-nav-dropdown">
-              <NavDropdown.Item href={"/movieList/" + NowPlaying}>
-                Now Playing
+              <NavDropdown.Item>
+                <Link to="/nowPlaying">Now Playing</Link>
               </NavDropdown.Item>
-              <NavDropdown.Item href={"/movieList/" + Popular}>
-                Popular
+              <NavDropdown.Item>
+                <Link to="/popular">Popular</Link>
               </NavDropdown.Item>
-              <NavDropdown.Item href={"/movieList/" + TopRated}>
-                Top Rated
+              <NavDropdown.Item>
+                <Link to="/topRated">Top Rated</Link>
               </NavDropdown.Item>
-              <NavDropdown.Item href={"/movieList/" + Upcoming}>
-                Upcoming
+              <NavDropdown.Item>
+                <Link to="/upcoming">Upcoming</Link>
               </NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action/3.4">
