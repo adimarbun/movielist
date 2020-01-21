@@ -27,7 +27,7 @@ class TopRated extends Component {
     return (
       <div>
         <Header />
-
+        <Card.Header as="h2">Top Rated</Card.Header>
         <Row style={{ width: "100%", padding: " 0 10%" }}>
           {datas.map((data, index) => {
             return (

@@ -6,7 +6,8 @@ import {
   NavDropdown,
   Form,
   FormControl,
-  Button
+  Button,
+  Card
 } from "react-bootstrap";
 
 class Header extends Component {
@@ -18,22 +19,18 @@ class Header extends Component {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
             <NavDropdown title="Movie" id="basic-nav-dropdown">
-              <NavDropdown.Item>
+              <Card.Header>
                 <Link to="/nowPlaying">Now Playing</Link>
-              </NavDropdown.Item>
-              <NavDropdown.Item>
+              </Card.Header>
+              <Card.Header>
                 <Link to="/popular">Popular</Link>
-              </NavDropdown.Item>
-              <NavDropdown.Item>
+              </Card.Header>
+              <Card.Header>
                 <Link to="/topRated">Top Rated</Link>
-              </NavDropdown.Item>
-              <NavDropdown.Item>
+              </Card.Header>
+              <Card.Header>
                 <Link to="/upcoming">Upcoming</Link>
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item>
+              </Card.Header>
             </NavDropdown>
           </Nav>
           <Form inline>

@@ -27,7 +27,7 @@ class NowPlaying extends Component {
     return (
       <div>
         <Header />
-
+        <Card.Header as="h2">Now Playing</Card.Header>
         <Row style={{ width: "100%", padding: " 0 10%" }}>
           {datas.map((data, index) => {
             return (

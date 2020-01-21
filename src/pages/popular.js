@@ -3,17 +3,14 @@ import Header from "../components/header";
 import Footer from "../components/footer";
 import { withRouter, Link } from "react-router-dom";
 import Axios from "axios";
-import { Card, Row } from "react-bootstrap";
+import { Card, Row, Spinner } from "react-bootstrap";
+
+import { connect } from "react-redux";
+import { getPopular } from "../_actions/movies";
 
 class Popular extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: []
-    };
-  }
-
   componentDidMount() {
+    this.props.getPopular();
     Axios({
       method: "get",
       url: `https://api.themoviedb.org/3/movie/popular?api_key=8f1d4611b0e6ecfdb978fc2bb38c6fc6`
@@ -23,13 +20,19 @@ class Popular extends Component {
   }
 
   render() {
-    const datas = this.state.data;
+    const { dataPopular, isLoading, error } = this.props.popular;
+    if (isLoading) {
+      return <Spinner animation="grow" variant="info" />;
+    }
+    if (error) {
+      return <p>Your Data Not Found </p>;
+    }
     return (
       <div>
         <Header />
-
+        <Card.Header as="h2">Popular</Card.Header>
         <Row style={{ width: "100%", padding: " 0 10%" }}>
-          {datas.map((data, index) => {
+          {dataPopular.map((data, index) => {
             return (
               <Card key={index} style={{ width: "18rem", margin: "5px" }}>
                 <Card.Img
@@ -58,4 +61,19 @@ class Popular extends Component {
   }
 }
 
-export default withRouter(Popular);
+const mapStateToProps = state => {
+  return {
+    popular: state.getPopular
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getPopular: () => {
+      dispatch(getPopular());
+    }
+  };
+};
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Popular)
+);
